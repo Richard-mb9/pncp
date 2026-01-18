@@ -1,0 +1,6 @@
+# pyright: reportUnusedImport=false
+from .repository_manager import RepositoryManager
+from .compra_repository import CompraRepository
+from .orgao_entidade_repository import OrgaoEntidadeRepository
+from .unidade_orgao_repository import UnidadeOrgaoRepository
+from .amparo_legal_repository import AmparoLegalRepository
