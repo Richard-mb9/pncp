@@ -8,7 +8,7 @@ unidade_orgao = Table(
     "unidade_orgao",
     mapper_registry.metadata,
     Column("id", Integer, primary_key=True),
-    Column("compra_id", Integer, ForeignKey("compra.id"), nullable=False),
+    Column("compra_id", Integer, ForeignKey("compras.id"), nullable=False),
     Column("uf_nome", String, nullable=False),
     Column("codigo_unidade", String, nullable=False),
     Column("uf_sigla", String, nullable=False),

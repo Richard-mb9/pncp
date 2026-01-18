@@ -8,7 +8,7 @@ amparo_legal = Table(
     "amparo_legal",
     mapper_registry.metadata,
     Column("id", Integer, primary_key=True),
-    Column("compra_id", Integer, ForeignKey("compra.id"), nullable=False),
+    Column("compra_id", Integer, ForeignKey("compras.id"), nullable=False),
     Column("codigo", Integer, nullable=False),
     Column("nome", String, nullable=False),
     Column("descricao", String, nullable=False),

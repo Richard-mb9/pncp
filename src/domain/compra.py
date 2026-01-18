@@ -1,4 +1,4 @@
-from typing import Optional, TYPE_CHECKING
+from typing import Optional, Dict, Any, TYPE_CHECKING
 from datetime import datetime
 
 if TYPE_CHECKING:
@@ -39,8 +39,8 @@ class Compra:
         situacao_compra_id: int,
         situacao_compra_nome: str,
         usuario_nome: str,
-        orgao_sub_rogado: Optional[str] = None,
-        unidade_sub_rogada: Optional[str] = None,
+        orgao_sub_rogado: Optional[Dict[str, Any]] = None,
+        unidade_sub_rogada: Optional[Dict[str, Any]] = None,
         informacao_complementar: Optional[str] = None,
         link_sistema_origem: Optional[str] = None,
         justificativa_presencial: Optional[str] = None,

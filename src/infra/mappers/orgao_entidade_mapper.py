@@ -8,7 +8,7 @@ orgao_entidade = Table(
     "orgao_entidade",
     mapper_registry.metadata,
     Column("id", Integer, primary_key=True),
-    Column("compra_id", Integer, ForeignKey("compra.id"), nullable=False),
+    Column("compra_id", Integer, ForeignKey("compras.id"), nullable=False),
     Column("cnpj", String, nullable=False),
     Column("razao_social", String, nullable=False),
     Column("poder_id", String, nullable=False),

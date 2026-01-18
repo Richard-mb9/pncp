@@ -1,5 +1,4 @@
-import json
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any
 from datetime import datetime
 
 from application.repositories import RepositoryManagerInterface
@@ -15,6 +14,14 @@ class SaveDataUseCase:
 
     def execute(self, data: List[Dict[str, Any]]) -> None:
         for item in data:
+            numero_controle_pncp = item["numeroControlePNCP"]
+
+            existing_compra = self.compra_repository.find_by_numero_controle_pncp(
+                numero_controle_pncp
+            )
+            if existing_compra:
+                continue
+
             compra = self._create_compra(item)
             saved_compra = self.compra_repository.insert(compra)
 
@@ -38,13 +45,6 @@ class SaveDataUseCase:
 
     def _parse_datetime(self, date_string: str) -> datetime:
         return datetime.fromisoformat(date_string)
-
-    def _to_json_string(self, value: Any) -> Optional[str]:
-        if value is None:
-            return None
-        if isinstance(value, dict):
-            return json.dumps(value, ensure_ascii=False)
-        return str(value)
 
     def _create_compra(self, item: Dict[str, Any]) -> Compra:
         return Compra(
@@ -76,8 +76,8 @@ class SaveDataUseCase:
             situacao_compra_id=item["situacaoCompraId"],
             situacao_compra_nome=item["situacaoCompraNome"],
             usuario_nome=item["usuarioNome"],
-            orgao_sub_rogado=self._to_json_string(item.get("orgaoSubRogado")),
-            unidade_sub_rogada=self._to_json_string(item.get("unidadeSubRogada")),
+            orgao_sub_rogado=item.get("orgaoSubRogado"),
+            unidade_sub_rogada=item.get("unidadeSubRogada"),
             informacao_complementar=item.get("informacaoComplementar"),
             link_sistema_origem=item.get("linkSistemaOrigem"),
             justificativa_presencial=item.get("justificativaPresencial"),

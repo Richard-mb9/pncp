@@ -1,12 +1,13 @@
 from sqlalchemy import Table, Column, Integer, String, DateTime, Float, Boolean, Text
+from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import relationship
 
 from domain import Compra
 
 from .mapper_config import mapper_registry
 
-compra = Table(
-    "compra",
+compras = Table(
+    "compras",
     mapper_registry.metadata,
     Column("id", Integer, primary_key=True),
     Column("data_atualizacao", DateTime, nullable=False),
@@ -33,8 +34,8 @@ compra = Table(
     Column("situacao_compra_id", Integer, nullable=False),
     Column("situacao_compra_nome", String, nullable=False),
     Column("usuario_nome", String, nullable=False),
-    Column("orgao_sub_rogado", String, nullable=True),
-    Column("unidade_sub_rogada", String, nullable=True),
+    Column("orgao_sub_rogado", JSONB, nullable=True),
+    Column("unidade_sub_rogada", JSONB, nullable=True),
     Column("informacao_complementar", Text, nullable=True),
     Column("link_sistema_origem", String, nullable=True),
     Column("justificativa_presencial", Text, nullable=True),
@@ -45,7 +46,7 @@ compra = Table(
 
 mapper_registry.map_imperatively(
     Compra,
-    compra,
+    compras,
     properties={
         "orgao_entidade": relationship(
             "OrgaoEntidade",
