@@ -1,4 +1,5 @@
-from typing import List, Dict, Any
+import json
+from typing import List, Dict, Any, Optional
 from datetime import datetime
 
 from application.repositories import RepositoryManagerInterface
@@ -38,6 +39,13 @@ class SaveDataUseCase:
     def _parse_datetime(self, date_string: str) -> datetime:
         return datetime.fromisoformat(date_string)
 
+    def _to_json_string(self, value: Any) -> Optional[str]:
+        if value is None:
+            return None
+        if isinstance(value, dict):
+            return json.dumps(value, ensure_ascii=False)
+        return str(value)
+
     def _create_compra(self, item: Dict[str, Any]) -> Compra:
         return Compra(
             data_atualizacao=self._parse_datetime(item["dataAtualizacao"]),
@@ -68,8 +76,8 @@ class SaveDataUseCase:
             situacao_compra_id=item["situacaoCompraId"],
             situacao_compra_nome=item["situacaoCompraNome"],
             usuario_nome=item["usuarioNome"],
-            orgao_sub_rogado=item.get("orgaoSubRogado"),
-            unidade_sub_rogada=item.get("unidadeSubRogada"),
+            orgao_sub_rogado=self._to_json_string(item.get("orgaoSubRogado")),
+            unidade_sub_rogada=self._to_json_string(item.get("unidadeSubRogada")),
             informacao_complementar=item.get("informacaoComplementar"),
             link_sistema_origem=item.get("linkSistemaOrigem"),
             justificativa_presencial=item.get("justificativaPresencial"),

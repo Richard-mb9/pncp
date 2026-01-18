@@ -22,7 +22,7 @@ compra = Table(
     Column("data_encerramento_proposta", DateTime, nullable=False),
     Column("data_publicacao_pncp", DateTime, nullable=False),
     Column("data_atualizacao_global", DateTime, nullable=False),
-    Column("numero_controle_pncp", String, nullable=False),
+    Column("numero_controle_pncp", String, nullable=False, index=True),
     Column("modalidade_id", Integer, nullable=False),
     Column("modo_disputa_id", Integer, nullable=False),
     Column("valor_total_estimado", Float, nullable=False),
