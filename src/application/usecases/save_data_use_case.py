@@ -1,4 +1,4 @@
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 from datetime import datetime
 
 from application.repositories import RepositoryManagerInterface
@@ -43,26 +43,19 @@ class SaveDataUseCase:
                 )
                 self.amparo_legal_repository.insert(amparo_legal)
 
-    def _parse_datetime(self, date_string: str) -> datetime:
+    def _parse_datetime(self, date_string: Optional[str]) -> Optional[datetime]:
+        if date_string is None:
+            return None
         return datetime.fromisoformat(date_string)
 
     def _create_compra(self, item: Dict[str, Any]) -> Compra:
         return Compra(
-            data_atualizacao=self._parse_datetime(item["dataAtualizacao"]),
             ano_compra=item["anoCompra"],
             sequencial_compra=item["sequencialCompra"],
             numero_compra=item["numeroCompra"],
             processo=item["processo"],
             objeto_compra=item["objetoCompra"],
-            valor_total_homologado=item.get("valorTotalHomologado"),
             srp=item["srp"],
-            data_inclusao=self._parse_datetime(item["dataInclusao"]),
-            data_abertura_proposta=self._parse_datetime(item["dataAberturaProposta"]),
-            data_encerramento_proposta=self._parse_datetime(
-                item["dataEncerramentoProposta"]
-            ),
-            data_publicacao_pncp=self._parse_datetime(item["dataPublicacaoPncp"]),
-            data_atualizacao_global=self._parse_datetime(item["dataAtualizacaoGlobal"]),
             numero_controle_pncp=item["numeroControlePNCP"],
             modalidade_id=item["modalidadeId"],
             modo_disputa_id=item["modoDisputaId"],
@@ -76,6 +69,15 @@ class SaveDataUseCase:
             situacao_compra_id=item["situacaoCompraId"],
             situacao_compra_nome=item["situacaoCompraNome"],
             usuario_nome=item["usuarioNome"],
+            valor_total_homologado=item.get("valorTotalHomologado"),
+            data_atualizacao=self._parse_datetime(item.get("dataAtualizacao")),
+            data_inclusao=self._parse_datetime(item.get("dataInclusao")),
+            data_abertura_proposta=self._parse_datetime(item.get("dataAberturaProposta")),
+            data_encerramento_proposta=self._parse_datetime(
+                item.get("dataEncerramentoProposta")
+            ),
+            data_publicacao_pncp=self._parse_datetime(item.get("dataPublicacaoPncp")),
+            data_atualizacao_global=self._parse_datetime(item.get("dataAtualizacaoGlobal")),
             orgao_sub_rogado=item.get("orgaoSubRogado"),
             unidade_sub_rogada=item.get("unidadeSubRogada"),
             informacao_complementar=item.get("informacaoComplementar"),

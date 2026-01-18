@@ -30,14 +30,19 @@ class PNCP:
             "tamanhoPagina": 50,
         }
 
-        try:
-            response = requests.get(
-                f"{BASE_URL_PNCP}/contratacoes/publicacao", params=params, timeout=3
-            )
-            response.raise_for_status()
-            response_data: Dict[str, Any] = response.json()
+        result: List[Dict[str, Any]] = []
 
-            return response_data.get("data", [])
+        try:
+            count = 1
+            empty = False
+            while empty is False:
+                response = self.__make_request(params, count)
+                if len(response) > 0:
+                    count += 1
+                    result.extend(response)
+                else:
+                    empty = True
+            return result
         except HTTPError as error:
             print(f"error http para o range ({range_for_log}): {error.response.json()}")
             return []
@@ -45,3 +50,20 @@ class PNCP:
         except Exception as error:
             print(f"erro generico para o range ({range_for_log}): {error.args}")
             return []
+
+    def __make_request(
+        self, params: Dict[str, Any], pagina: int
+    ) -> List[Dict[str, Any]]:
+        params["pagina"] = pagina
+        response = requests.get(
+            f"{BASE_URL_PNCP}/contratacoes/publicacao", params=params, timeout=3
+        )
+
+        response.raise_for_status()
+
+        if response.status_code == 204:
+            return []
+
+        response_data: Dict[str, Any] = response.json()
+
+        return response_data.get("data", [])

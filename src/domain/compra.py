@@ -15,19 +15,12 @@ class Compra:
 
     def __init__(
         self,
-        data_atualizacao: datetime,
         ano_compra: int,
         sequencial_compra: int,
         numero_compra: str,
         processo: str,
         objeto_compra: str,
-        valor_total_homologado: Optional[float],
         srp: bool,
-        data_inclusao: datetime,
-        data_abertura_proposta: datetime,
-        data_encerramento_proposta: datetime,
-        data_publicacao_pncp: datetime,
-        data_atualizacao_global: datetime,
         numero_controle_pncp: str,
         modalidade_id: int,
         modo_disputa_id: int,
@@ -39,6 +32,13 @@ class Compra:
         situacao_compra_id: int,
         situacao_compra_nome: str,
         usuario_nome: str,
+        valor_total_homologado: Optional[float] = None,
+        data_atualizacao: Optional[datetime] = None,
+        data_inclusao: Optional[datetime] = None,
+        data_abertura_proposta: Optional[datetime] = None,
+        data_encerramento_proposta: Optional[datetime] = None,
+        data_publicacao_pncp: Optional[datetime] = None,
+        data_atualizacao_global: Optional[datetime] = None,
         orgao_sub_rogado: Optional[Dict[str, Any]] = None,
         unidade_sub_rogada: Optional[Dict[str, Any]] = None,
         informacao_complementar: Optional[str] = None,
@@ -48,7 +48,6 @@ class Compra:
         created_at: Optional[datetime] = None,
         updated_at: Optional[datetime] = None,
     ) -> None:
-        self.data_atualizacao = data_atualizacao
         self.ano_compra = ano_compra
         self.sequencial_compra = sequencial_compra
         self.numero_compra = numero_compra
@@ -56,11 +55,6 @@ class Compra:
         self.objeto_compra = objeto_compra
         self.valor_total_homologado = valor_total_homologado
         self.srp = srp
-        self.data_inclusao = data_inclusao
-        self.data_abertura_proposta = data_abertura_proposta
-        self.data_encerramento_proposta = data_encerramento_proposta
-        self.data_publicacao_pncp = data_publicacao_pncp
-        self.data_atualizacao_global = data_atualizacao_global
         self.numero_controle_pncp = numero_controle_pncp
         self.modalidade_id = modalidade_id
         self.modo_disputa_id = modo_disputa_id
@@ -72,6 +66,12 @@ class Compra:
         self.situacao_compra_id = situacao_compra_id
         self.situacao_compra_nome = situacao_compra_nome
         self.usuario_nome = usuario_nome
+        self.data_atualizacao = data_atualizacao
+        self.data_inclusao = data_inclusao
+        self.data_abertura_proposta = data_abertura_proposta
+        self.data_encerramento_proposta = data_encerramento_proposta
+        self.data_publicacao_pncp = data_publicacao_pncp
+        self.data_atualizacao_global = data_atualizacao_global
         self.orgao_sub_rogado = orgao_sub_rogado
         self.unidade_sub_rogada = unidade_sub_rogada
         self.informacao_complementar = informacao_complementar
