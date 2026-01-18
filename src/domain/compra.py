@@ -8,13 +8,13 @@ if TYPE_CHECKING:
 
 
 class Compra:
+    id: int
     orgao_entidade: "OrgaoEntidade"
     unidade_orgao: "UnidadeOrgao"
     amparo_legal: "AmparoLegal"
 
     def __init__(
         self,
-        id: int,
         data_atualizacao: datetime,
         ano_compra: int,
         sequencial_compra: int,
@@ -48,7 +48,6 @@ class Compra:
         created_at: Optional[datetime] = None,
         updated_at: Optional[datetime] = None,
     ) -> None:
-        self.id = id
         self.data_atualizacao = data_atualizacao
         self.ano_compra = ano_compra
         self.sequencial_compra = sequencial_compra

@@ -3,9 +3,10 @@ from datetime import datetime
 
 
 class AmparoLegal:
+    id: int
+
     def __init__(
         self,
-        id: int,
         compra_id: int,
         codigo: int,
         nome: str,
@@ -13,7 +14,6 @@ class AmparoLegal:
         created_at: Optional[datetime] = None,
         updated_at: Optional[datetime] = None,
     ) -> None:
-        self.id = id
         self.compra_id = compra_id
         self.codigo = codigo
         self.nome = nome

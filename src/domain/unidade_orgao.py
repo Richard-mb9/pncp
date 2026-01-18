@@ -3,9 +3,10 @@ from datetime import datetime
 
 
 class UnidadeOrgao:
+    id: int
+
     def __init__(
         self,
-        id: int,
         compra_id: int,
         uf_nome: str,
         codigo_unidade: str,
@@ -16,7 +17,6 @@ class UnidadeOrgao:
         created_at: Optional[datetime] = None,
         updated_at: Optional[datetime] = None,
     ) -> None:
-        self.id = id
         self.compra_id = compra_id
         self.uf_nome = uf_nome
         self.codigo_unidade = codigo_unidade
