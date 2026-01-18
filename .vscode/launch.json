@@ -22,11 +22,11 @@
       "request": "launch",
       "program": "${workspaceFolder}/src/main.py",
       "console": "integratedTerminal",
-      "cwd": "${workspaceFolder}",
+      "cwd": "${workspaceFolder}/src",
       "justMyCode": true,
       "env": {
         "ENVIRONMENT": "local",
-        "PYTHONPATH": "${workspaceFolder}/src"
+        "PYTHONPATH": "${workspaceFolder}"
       }
     }
   ]
